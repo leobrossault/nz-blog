@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react'
+import { Place } from '../../types'
 import { useMap } from 'react-leaflet/hooks'
 import {
   MapContainer,
@@ -15,19 +16,20 @@ import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
 import 'leaflet-defaulticon-compatibility'
 
 type MapProps = {
-  places: Array<Object>
+  places: [Place]
+  setCurrentPlace: Function
 }
 
-function FitBounds({ places }: any) {
+function FitBounds({ places, setCurrentPlace }: any) {
   const map = useMap()
 
   useEffect(() => {
     if (!map) return
 
-    const primaryColor = process.env.tailwindConfig.colors.primary
+    const primaryColor: string = process.env.tailwindConfig.colors.primary
 
     const routingControl = L.Routing.control({
-      waypoints: places.map(place =>
+      waypoints: places.map((place: Place) =>
         L.latLng(place.attributes.latitude, place.attributes.longitude)
       ),
       createMarker: (i: any, wp: any) => {
@@ -48,7 +50,13 @@ function FitBounds({ places }: any) {
             iconAnchor: [12, 24]
           })
         }).on('click', function (e) {
-          console.log('click')
+          setCurrentPlace(
+            places.find(
+              (place: Place) =>
+                +place.attributes.latitude === wp.latLng.lat &&
+                +place.attributes.longitude === wp.latLng.lng
+            )
+          )
         })
       },
       lineOptions: {
@@ -66,9 +74,7 @@ function FitBounds({ places }: any) {
   return null
 }
 
-export const Map = ({ places }: MapProps) => {
-  const groupRef = useRef<HTMLInputElement>(null)
-
+export const Map = ({ places, setCurrentPlace }: MapProps) => {
   return (
     <MapContainer
       center={[40.8054, -74.0241]}
@@ -78,7 +84,7 @@ export const Map = ({ places }: MapProps) => {
     >
       <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png" />
 
-      <FitBounds places={places} />
+      <FitBounds places={places} setCurrentPlace={setCurrentPlace} />
     </MapContainer>
   )
 }

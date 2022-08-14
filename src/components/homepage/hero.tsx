@@ -1,21 +1,25 @@
-import { getMedia } from '../../api/media'
-
 import { Title } from '../library'
+import { ArrowDownCircle } from 'react-feather'
 
-type HeroProps = {
-  mainPhoto: object
-}
-
-export default function Hero({ mainPhoto }: HeroProps) {
+export default function Hero() {
   return (
-    <section className="flex items-center justify-center h-screen">
-      <img
-        className="absolute inset-0 z-0 w-full h-full object-cover"
-        src={getMedia(mainPhoto, 'default')}
-      />
+    <section className="relative flex items-center justify-center h-screen">
+      <div className="relative flex flex-col items-center gap-xxl">
+        <div className="w-[100px] h-[100px] flex items-center justify-center bg-white">
+          Logo tmp
+        </div>
 
-      <div className="relative z-1 prose">
-        <Title className="text-white">Blog de Mathilde & Léo</Title>
+        <div className="prose text-center">
+          <Title className="text-white">Découvrez notre aventure</Title>
+
+          <Title className="text-white" tag="h2">
+            Sur les routes de Nouvelle-Zélande
+          </Title>
+        </div>
+      </div>
+
+      <div className="absolute bottom-xl left-1/2 -translate-x-1/2 text-white">
+        <ArrowDownCircle size={30} className="animate-bounce" />
       </div>
     </section>
   )

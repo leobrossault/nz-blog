@@ -1,19 +1,25 @@
-import { fetchApi } from '../api'
-import { routes } from '../constants'
-
 import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
+import { useState } from 'react'
+
+import { fetchApi } from '../api'
+import { Article } from '../types'
+import { routes } from '../constants'
+import { getMedia } from '../api/media'
 
 import Seo from '../components/commons/seo/seo'
 import Layout from '../components/commons/layout/layout'
 import { Link } from '../components/library'
 
 import Hero from '../components/homepage/hero'
+import Description from '../components/homepage/description'
+import CurrentPlace from '../components/homepage/current-place'
 
 const Home: NextPage = ({ articles, homepage, places }: any) => {
   const Map = dynamic(() => import('../components/map/map'), {
     ssr: false
   })
+  const [currentPlace, setCurrentPlace] = useState()
 
   return (
     <>
@@ -24,11 +30,29 @@ const Home: NextPage = ({ articles, homepage, places }: any) => {
       />
 
       <Layout>
-        <Hero mainPhoto={homepage.attributes.main_photo} />
+        <div className="relative">
+          <img
+            className="absolute inset-0 z-0 w-full h-full object-cover"
+            src={getMedia(homepage.attributes.main_photo, 'default')}
+          />
 
-        <Map places={places} />
+          <div className="relative z-1">
+            <Hero />
 
-        {articles.map((article: any) => (
+            <Description
+              description={homepage.attributes.description}
+              photo={homepage.attributes.photo_us}
+            />
+          </div>
+        </div>
+
+        <div>
+          <CurrentPlace place={currentPlace} />
+
+          <Map places={places} setCurrentPlace={setCurrentPlace} />
+        </div>
+
+        {articles.map((article: Article) => (
           <Link
             href={{
               pathname: routes.article,
@@ -52,7 +76,7 @@ export async function getStaticProps() {
   const articlesData = await fetchApi('articles')
   const placesData = await fetchApi('places')
   const homepageData = await fetchApi('homepage', {
-    populate: 'main_photo'
+    populate: ['main_photo', 'photo_us']
   })
 
   return {

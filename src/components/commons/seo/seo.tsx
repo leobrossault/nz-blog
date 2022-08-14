@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import { useContext } from 'react'
 import { GlobalContext } from '../../../pages/_app'
+import { SeoData } from '../../../types'
 
-const Seo = ({ specificSeo }: any) => {
+const Seo = ({ specificSeo }: { specificSeo: SeoData }) => {
   const { seo }: any = useContext(GlobalContext)
 
   const seoWithDefaults = {

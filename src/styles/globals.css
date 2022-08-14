@@ -1,3 +1,135 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: 'Lato';
+        src: url('/fonts/Lato/Lato-Bold/Lato-Bold.woff2') format('woff2'),
+        url('/fonts/Lato/Lato-Bold/Lato-Bold.woff') format('woff'),
+        url('/fonts/Lato/Lato-Bold/Lato-Bold.otf') format('opentype');
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Lato';
+        src: url('/fonts/Lato/Lato-BoldItalic/Lato-BoldItalic.woff2') format('woff2'),
+        url('/fonts/Lato/Lato-BoldItalic/Lato-BoldItalic.woff') format('woff'),
+        url('/fonts/Lato/Lato-BoldItalic/Lato-BoldItalic.otf') format('opentype');
+        font-style: italic;
+        font-weight: 700;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Lato';
+        src: url('/fonts/Lato/Lato-Regular/Lato-Regular.woff2') format('woff2'),
+        url('/fonts/Lato/Lato-Regular/Lato-Regular.woff') format('woff'),
+        url('/fonts/Lato/Lato-Regular/Lato-Regular.otf') format('opentype');
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Lato';
+        src: url('/fonts/Lato/Lato-Italic/Lato-Italic.woff2') format('woff2'),
+        url('/fonts/Lato/Lato-Italic/Lato-Italic.woff') format('woff'),
+        url('/fonts/Lato/Lato-Italic/Lato-Italic.otf') format('opentype');
+        font-style: italic;
+        font-weight: 400;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Lato';
+        src: url('/fonts/Lato/Lato-Light/Lato-Light.woff2') format('woff2'),
+        url('/fonts/Lato/Lato-Light/Lato-Light.woff') format('woff'),
+        url('/fonts/Lato/Lato-Light/Lato-Light.otf') format('opentype');
+        font-style: normal;
+        font-weight: 200;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Lato';
+        src: url('/fonts/Lato/Lato-LightItalic/Lato-LightItalic.woff2') format('woff2'),
+        url('/fonts/Lato/Lato-LightItalic/Lato-LightItalic.woff') format('woff'),
+        url('/fonts/Lato/Lato-LightItalic/Lato-LightItalic.otf') format('opentype');
+        font-style: italic;
+        font-weight: 200;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Mermaid';
+        src: url('/fonts/Mermaid/MermaidSwashCaps/MermaidSwashCaps.woff2') format('woff2'),
+        url('/fonts/Mermaid/MermaidSwashCaps/MermaidSwashCaps.woff') format('woff'),
+        url('/fonts/Mermaid/MermaidSwashCaps/MermaidSwashCaps.otf') format('opentype');
+        font-style: normal;
+        font-weight: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Rakesly';
+        src: url('/fonts/Rakesly/Rakesly-Bold/Rakesly-Bold.woff2') format('woff2'),
+        url('/fonts/Rakesly/Rakesly-Bold/Rakesly-Bold.woff') format('woff'),
+        url('/fonts/Rakesly/Rakesly-Bold/Rakesly-Bold.otf') format('opentype');
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Rakesly';
+        src: url('/fonts/Rakesly/Rakesly-BoldItalic/Rakesly-BoldItalic.woff2') format('woff2'),
+        url('/fonts/Rakesly/Rakesly-BoldItalic/Rakesly-BoldItalic.woff') format('woff'),
+        url('/fonts/Rakesly/Rakesly-BoldItalic/Rakesly-BoldItalic.otf') format('opentype');
+        font-style: italic;
+        font-weight: 700;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Rakesly';
+        src: url('/fonts/Rakesly/Rakesly-Regular/Rakesly-Regular.woff2') format('woff2'),
+        url('/fonts/Rakesly/Rakesly-Regular/Rakesly-Regular.woff') format('woff'),
+        url('/fonts/Rakesly/Rakesly-Regular/Rakesly-Regular.otf') format('opentype');
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Rakesly';
+        src: url('/fonts/Rakesly/Rakesly-Italic/Rakesly-Italic.woff2') format('woff2'),
+        url('/fonts/Rakesly/Rakesly-Italic/Rakesly-Italic.woff') format('woff'),
+        url('/fonts/Rakesly/Rakesly-Italic/Rakesly-Italic.otf') format('opentype');
+        font-style: italic;
+        font-weight: 400;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Rakesly';
+        src: url('/fonts/Rakesly/Rakesly-Light/Rakesly-Light.woff2') format('woff2'),
+        url('/fonts/Rakesly/Rakesly-Light/Rakesly-Light.woff') format('woff'),
+        url('/fonts/Rakesly/Rakesly-Light/Rakesly-Light.otf') format('opentype');
+        font-style: normal;
+        font-weight: 200;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Rakesly';
+        src: url('/fonts/Rakesly/Rakesly-LightItalic/Rakesly-LightItalic.woff2') format('woff2'),
+        url('/fonts/Rakesly/Rakesly-LightItalic/Rakesly-LightItalic.woff') format('woff'),
+        url('/fonts/Rakesly/Rakesly-LightItalic/Rakesly-LightItalic.otf') format('opentype');
+        font-style: italic;
+        font-weight: 200;
+        font-display: swap;
+    }
+}

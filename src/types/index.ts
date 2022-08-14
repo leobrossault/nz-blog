@@ -1,17 +1,24 @@
 export interface Article {
-  title: string
-  introduction: string
-  body: string
-  images: Image[]
-  place: Place
-  tags: Tag[]
+  id: number
+  attributes: {
+    title: string
+    introduction: string
+    body: string
+    slug: string
+    images?: Image[]
+    place?: Place
+    tags?: Tag[]
+  }
 }
 
 export interface Place {
-  title: string
-  latitude: string
-  longitude: string
-  images: Image[]
+  id: number
+  attributes: {
+    title: string
+    latitude: string
+    longitude: string
+    images?: Image[]
+  }
 }
 
 export interface Tag {
@@ -21,4 +28,20 @@ export interface Tag {
 
 export interface Image {
   src: string
+}
+
+export interface Media {
+  data: {
+    id: number
+    attributes: {
+      url: string
+      formats: {
+        [key: string]: any
+      }
+    }
+  }
+}
+
+export interface SeoData {
+  metatitle: string
 }
