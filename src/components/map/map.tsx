@@ -80,7 +80,7 @@ export const Map = ({ places, setCurrentPlace }: MapProps) => {
       center={[40.8054, -74.0241]}
       zoom={20}
       scrollWheelZoom={true}
-      style={{ height: '100vh', width: '100%' }}
+      style={{ height: '780px', width: '100%' }}
     >
       <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png" />
 

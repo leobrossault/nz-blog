@@ -22,7 +22,7 @@ MyApp.getInitialProps = async (context: any) => {
   const appProps = await App.getInitialProps(context)
 
   const { data } = await fetchApi('global', {
-    populate: '*'
+    populate: ['*', 'seo.logo']
   })
 
   return { ...appProps, pageProps: { global: data } }

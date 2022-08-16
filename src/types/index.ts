@@ -15,6 +15,7 @@ export interface Place {
   id: number
   attributes: {
     title: string
+    slug: string
     latitude: string
     longitude: string
     image: Image

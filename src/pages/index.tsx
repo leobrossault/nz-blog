@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { fetchApi } from '../api'
 import { Article } from '../types'
@@ -16,7 +16,7 @@ import Description from '../components/homepage/description'
 import CurrentPlaceInfos from '../components/homepage/current-place-infos'
 import CurrentPlaceLink from '../components/homepage/current-place-link'
 
-const Home: NextPage = ({ articles, homepage, places }: any) => {
+const Home: NextPage = ({ articles, homepage, places, global }: any) => {
   const Map = dynamic(() => import('../components/map/map'), {
     ssr: false
   })
@@ -38,7 +38,7 @@ const Home: NextPage = ({ articles, homepage, places }: any) => {
           />
 
           <div className="relative z-1">
-            <Hero />
+            <Hero logo={global.attributes.seo.logo} />
 
             <Description
               description={homepage.attributes.description}
