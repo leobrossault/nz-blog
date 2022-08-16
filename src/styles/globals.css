@@ -133,3 +133,7 @@
         font-display: swap;
     }
 }
+
+.leaflet-container {
+    z-index: 1;
+}

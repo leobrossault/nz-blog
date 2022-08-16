@@ -17,7 +17,9 @@ export interface Place {
     title: string
     latitude: string
     longitude: string
-    images?: Image[]
+    image: Image
+    start: string
+    end?: string
   }
 }
 

@@ -13,7 +13,8 @@ import { Link } from '../components/library'
 
 import Hero from '../components/homepage/hero'
 import Description from '../components/homepage/description'
-import CurrentPlace from '../components/homepage/current-place'
+import CurrentPlaceInfos from '../components/homepage/current-place-infos'
+import CurrentPlaceLink from '../components/homepage/current-place-link'
 
 const Home: NextPage = ({ articles, homepage, places }: any) => {
   const Map = dynamic(() => import('../components/map/map'), {
@@ -46,8 +47,9 @@ const Home: NextPage = ({ articles, homepage, places }: any) => {
           </div>
         </div>
 
-        <div>
-          <CurrentPlace place={currentPlace} />
+        <div className="relative">
+          {currentPlace && <CurrentPlaceInfos place={currentPlace} />}
+          {currentPlace && <CurrentPlaceLink place={currentPlace} />}
 
           <Map places={places} setCurrentPlace={setCurrentPlace} />
         </div>
@@ -74,7 +76,9 @@ export default Home
 
 export async function getStaticProps() {
   const articlesData = await fetchApi('articles')
-  const placesData = await fetchApi('places')
+  const placesData = await fetchApi('places', {
+    populate: ['image']
+  })
   const homepageData = await fetchApi('homepage', {
     populate: ['main_photo', 'photo_us']
   })

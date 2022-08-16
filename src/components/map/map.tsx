@@ -49,7 +49,7 @@ function FitBounds({ places, setCurrentPlace }: any) {
             iconSize: [24, 24],
             iconAnchor: [12, 24]
           })
-        }).on('click', function (e) {
+        }).on('click', function () {
           setCurrentPlace(
             places.find(
               (place: Place) =>
