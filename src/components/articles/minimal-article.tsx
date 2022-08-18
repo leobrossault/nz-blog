@@ -29,7 +29,7 @@ const MinimalArticle = ({
         pathname: routes.article,
         query: {
           place: slugPlace,
-          article: slug
+          slug
         }
       }}
     >
