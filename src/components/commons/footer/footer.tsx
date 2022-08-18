@@ -9,7 +9,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-primary p-xxl mt-xxl">
-      <div className="container mx-auto">
+      <div className="container">
         <Text className="text-white">Suivez nous sur instagram</Text>
 
         <div className="mt-m grid gap-s">

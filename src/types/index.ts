@@ -5,6 +5,8 @@ export interface Article {
     introduction: string
     body: string
     slug: string
+    createdAt: string
+    main: Image
     images?: Image[]
     place?: Place
     tags?: Tag[]

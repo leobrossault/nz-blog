@@ -6,5 +6,5 @@ export function getMedia(media: Media, format: string = 'medium') {
     return getServerUrl(media.data.attributes.url)
   }
 
-  return getServerUrl(media.data.attributes.formats[format])
+  return getServerUrl(media.data.attributes.formats[format].url)
 }

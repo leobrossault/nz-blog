@@ -23,6 +23,8 @@ type MapProps = {
 function FitBounds({ places, setCurrentPlace }: any) {
   const map = useMap()
 
+  console.log('reinit')
+
   useEffect(() => {
     if (!map) return
 
@@ -67,6 +69,10 @@ function FitBounds({ places, setCurrentPlace }: any) {
         'pk.eyJ1IjoibGVvYnJvc3NhdWx0IiwiYSI6ImNsNnF2d2lrdjBsZmIzZG1tMmYzdWVxZmUifQ.FtNaYvgw4zwel_XTF_oToA'
       ), */
     }).addTo(map)
+
+    map.on('dragend', () => {
+      setCurrentPlace(null)
+    })
 
     routingControl.hide()
   }, [map])

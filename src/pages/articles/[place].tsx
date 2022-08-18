@@ -1,11 +1,20 @@
 import type { NextPage } from 'next'
 import { fetchApi } from '../../api'
-import { Place } from '../../types'
+import { Article, Place } from '../../types'
+import { getMedia } from '../../api/media'
 
 import Seo from '../../components/commons/seo/seo'
 import Layout from '../../components/commons/layout/layout'
+import { Title, Text } from '../../components/library'
+import MinimalArticle from '../../components/articles/minimal-article'
 
-const PlacePage: NextPage = ({ place }: Place) => {
+const PlacePage: NextPage = ({
+  place,
+  articles
+}: {
+  place: Place
+  articles: Array<Article>
+}) => {
   return (
     <>
       <Seo
@@ -14,7 +23,40 @@ const PlacePage: NextPage = ({ place }: Place) => {
         }}
       />
 
-      <Layout>{place.attributes.title}</Layout>
+      <Layout useHeader={true}>
+        <div className="relative z-0 top-[-90px] mb-[-90px] grid items-end h-[450px]">
+          <img
+            className="absolute inset-0 z-0 w-full h-full object-cover"
+            src={getMedia(place.attributes.image, 'default')}
+            alt={place.attributes.title}
+          />
+
+          <div className="relative z-10">
+            <div className="container pb-xl prose">
+              <Title className="text-white">{place.attributes.title}</Title>
+            </div>
+          </div>
+        </div>
+
+        <div className="container mt-xxl">
+          <div className="grid grid-cols-3 gap-m">
+            {articles.length ? (
+              articles.map((article: Article) => (
+                <MinimalArticle
+                  slugPlace={place.attributes.slug}
+                  title={article.attributes.title}
+                  image={article.attributes.main}
+                  introduction={article.attributes.introduction}
+                  slug={article.attributes.slug}
+                  date={article.attributes.createdAt}
+                />
+              ))
+            ) : (
+              <Text>Aucun article publié pour le moment ...</Text>
+            )}
+          </div>
+        </div>
+      </Layout>
     </>
   )
 }
@@ -36,14 +78,23 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }: any) {
   const { data } = await fetchApi('places', {
+    populate: ['image'],
     filters: {
       slug: params.place
     }
   })
 
+  const { data: articles } = await fetchApi('articles', {
+    populate: ['main'],
+    filters: {
+      place: data[0].id
+    }
+  })
+
   return {
     props: {
-      place: data[0]
+      place: data[0],
+      articles
     }
   }
 }

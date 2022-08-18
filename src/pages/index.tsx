@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 
 import { fetchApi } from '../api'
 import { Article } from '../types'

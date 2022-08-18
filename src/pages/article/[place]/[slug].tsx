@@ -1,8 +1,8 @@
 import type { NextPage } from 'next'
-import { fetchApi } from '../../api'
+import { fetchApi } from '../../../api'
 
-import Seo from '../../components/commons/seo/seo'
-import Layout from '../../components/commons/layout/layout'
+import Seo from '../../../components/commons/seo/seo'
+import Layout from '../../../components/commons/layout/layout'
 
 const Slug: NextPage = ({ article }: any) => {
   return (
