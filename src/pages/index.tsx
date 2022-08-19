@@ -4,17 +4,17 @@ import { useState } from 'react'
 
 import { fetchApi } from '../api'
 import { Article } from '../types'
-import { routes } from '../constants'
 import { getMedia } from '../api/media'
 
 import Seo from '../components/commons/seo/seo'
 import Layout from '../components/commons/layout/layout'
-import { Link } from '../components/library'
+import { Title } from '../components/library'
 
 import Hero from '../components/homepage/hero'
 import Description from '../components/homepage/description'
 import CurrentPlaceInfos from '../components/homepage/current-place-infos'
 import CurrentPlaceLink from '../components/homepage/current-place-link'
+import MinimalArticle from '../components/articles/minimal-article'
 
 const Home: NextPage = ({ articles, homepage, places, global }: any) => {
   const Map = dynamic(() => import('../components/map/map'), {
@@ -54,19 +54,31 @@ const Home: NextPage = ({ articles, homepage, places, global }: any) => {
           <Map places={places} setCurrentPlace={setCurrentPlace} />
         </div>
 
-        {articles.map((article: Article) => (
-          <Link
-            href={{
-              pathname: routes.article,
-              query: {
-                slug: article.attributes.slug
-              }
-            }}
-            key={article.id}
-          >
-            {article.attributes.title}
-          </Link>
-        ))}
+        <div className="container mt-xxl">
+          <div className="text-center prose mb-l">
+            <Title tag="h2" className="font-head text-4xl">
+              On vous en dit plus
+            </Title>
+
+            <Title tag="h3" className="uppercase">
+              Sur nos trajets, nos rencontres, nos découvertes ...
+            </Title>
+          </div>
+
+          <div className="grid grid-cols-3 gap-m">
+            {articles.map((article: Article) => (
+              <MinimalArticle
+                key={article.id}
+                title={article.attributes.title}
+                slugPlace={article.attributes.place?.data.attributes.slug}
+                image={article.attributes.main}
+                introduction={article.attributes.introduction}
+                slug={article.attributes.slug}
+                date={article.attributes.createdAt}
+              />
+            ))}
+          </div>
+        </div>
       </Layout>
     </>
   )
@@ -75,7 +87,9 @@ const Home: NextPage = ({ articles, homepage, places, global }: any) => {
 export default Home
 
 export async function getStaticProps() {
-  const articlesData = await fetchApi('articles')
+  const articlesData = await fetchApi('articles', {
+    populate: ['main', 'place']
+  })
   const placesData = await fetchApi('places', {
     populate: ['image']
   })

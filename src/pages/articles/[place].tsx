@@ -45,7 +45,7 @@ const PlacePage: NextPage<{
               articles.map((article: Article) => (
                 <MinimalArticle
                   key={article.id}
-                  slugPlace={place.attributes.slug}
+                  slugPlace={article.attributes.place?.data.attributes.slug}
                   title={article.attributes.title}
                   image={article.attributes.main}
                   introduction={article.attributes.introduction}
@@ -87,7 +87,7 @@ export async function getStaticProps({ params }: any) {
   })
 
   const { data: articles } = await fetchApi('articles', {
-    populate: ['main'],
+    populate: ['main', 'place'],
     filters: {
       place: data[0].id
     }

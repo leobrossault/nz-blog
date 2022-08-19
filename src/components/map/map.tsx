@@ -23,12 +23,10 @@ type MapProps = {
 function FitBounds({ places, setCurrentPlace }: any) {
   const map = useMap()
 
-  console.log('reinit')
-
   useEffect(() => {
     if (!map) return
 
-    const primaryColor: string = process.env.tailwindConfig.colors.primary
+    const primaryColor: any = process.env.tailwindConfig?.colors.primary
 
     const routingControl = L.Routing.control({
       waypoints: places.map((place: Place) =>
@@ -70,10 +68,6 @@ function FitBounds({ places, setCurrentPlace }: any) {
       ), */
     }).addTo(map)
 
-    map.on('dragend', () => {
-      setCurrentPlace(null)
-    })
-
     routingControl.hide()
   }, [map])
 
@@ -81,6 +75,7 @@ function FitBounds({ places, setCurrentPlace }: any) {
 }
 
 export const Map = ({ places, setCurrentPlace }: MapProps) => {
+  console.log(places)
   return (
     <MapContainer
       center={[40.8054, -74.0241]}

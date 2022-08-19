@@ -7,7 +7,7 @@ import { Title, Text, Link } from '../library'
 import { routes } from '../../constants'
 
 type MinimalArticleProps = {
-  slugPlace: string
+  slugPlace: string | undefined
   title: string
   image: Media
   introduction: string
