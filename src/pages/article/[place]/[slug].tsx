@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import ReactMarkdown from 'react-markdown'
 import { fetchApi } from '../../../api'
 import { Place, Article } from '../../../types'
 import { routes } from '../../../constants'
@@ -8,7 +9,9 @@ import Layout from '../../../components/commons/layout/layout'
 import { getMedia } from '../../../api/media'
 import { Title, Text, Link } from '../../../components/library'
 
-const Slug: NextPage = ({ article }: { article: Article }) => {
+const Slug: NextPage<{ article: Article }> = ({ article }) => {
+  const place: any = article.attributes.place?.data
+
   return (
     <>
       <Seo
@@ -17,8 +20,17 @@ const Slug: NextPage = ({ article }: { article: Article }) => {
         }}
       />
 
-      <Layout useHeader={true}>
-        <div className="relative z-0 top-[-90px] mb-[-90px] grid items-end h-[600px]">
+      <Layout
+        useHeader={true}
+        back={{
+          href: {
+            pathname: routes.articles,
+            query: { place: place.attributes.slug }
+          },
+          label: 'Retour aux articles'
+        }}
+      >
+        <div className="relative z-0 top-[-90px] mb-[-90px] grid items-end h-[800px]">
           <img
             className="absolute inset-0 z-0 w-full h-full object-cover"
             src={getMedia(article.attributes.main, 'default')}
@@ -26,7 +38,7 @@ const Slug: NextPage = ({ article }: { article: Article }) => {
           />
 
           <div className="relative z-10">
-            <div className="container pb-[200px] prose">
+            <div className="container pb-[400px] prose">
               <Title className="text-white">{article.attributes.title}</Title>
 
               <div>
@@ -36,18 +48,20 @@ const Slug: NextPage = ({ article }: { article: Article }) => {
                     href={{
                       pathname: routes.articles,
                       query: {
-                        place: article.attributes.place.data.attributes.slug
+                        place: place.attributes.slug
                       }
                     }}
                   >
-                    <a className="underline">
-                      {article.attributes.place.data.attributes.title}
-                    </a>
+                    <a className="underline">{place.attributes.title}</a>
                   </Link>
                 </Text>
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="relative z-10 top-[-350px] container mb-[-250px] py-xl px-xxl bg-white min-h-[500px] rounded-md prose-article">
+          <ReactMarkdown>{article.attributes.body}</ReactMarkdown>
         </div>
       </Layout>
     </>

@@ -2,19 +2,17 @@ import type { NextPage } from 'next'
 import { fetchApi } from '../../api'
 import { Article, Place } from '../../types'
 import { getMedia } from '../../api/media'
+import { routes } from '../../constants'
 
 import Seo from '../../components/commons/seo/seo'
 import Layout from '../../components/commons/layout/layout'
 import { Title, Text } from '../../components/library'
 import MinimalArticle from '../../components/articles/minimal-article'
 
-const PlacePage: NextPage = ({
-  place,
-  articles
-}: {
+const PlacePage: NextPage<{
   place: Place
   articles: Array<Article>
-}) => {
+}> = ({ place, articles }) => {
   return (
     <>
       <Seo
@@ -23,7 +21,10 @@ const PlacePage: NextPage = ({
         }}
       />
 
-      <Layout useHeader={true}>
+      <Layout
+        useHeader={true}
+        back={{ href: { pathname: routes.home }, label: "Retour à l'accueil" }}
+      >
         <div className="relative z-0 top-[-90px] mb-[-90px] grid items-end h-[450px]">
           <img
             className="absolute inset-0 z-0 w-full h-full object-cover"
@@ -43,6 +44,7 @@ const PlacePage: NextPage = ({
             {articles.length ? (
               articles.map((article: Article) => (
                 <MinimalArticle
+                  key={article.id}
                   slugPlace={place.attributes.slug}
                   title={article.attributes.title}
                   image={article.attributes.main}

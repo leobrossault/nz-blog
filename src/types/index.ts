@@ -6,10 +6,12 @@ export interface Article {
     body: string
     slug: string
     createdAt: string
-    main: Image
-    images?: Image[]
-    place?: Place
-    tags?: Tag[]
+    main: Media
+    images?: Media[] | undefined
+    place?: {
+      data: Place
+    }
+    tags?: Tag[] | undefined
   }
 }
 
@@ -20,7 +22,7 @@ export interface Place {
     slug: string
     latitude: string
     longitude: string
-    image: Image
+    image: Media
     start: string
     end?: string
   }
@@ -29,10 +31,6 @@ export interface Place {
 export interface Tag {
   title: string
   color: string
-}
-
-export interface Image {
-  src: string
 }
 
 export interface Media {

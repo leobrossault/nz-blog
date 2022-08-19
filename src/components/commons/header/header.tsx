@@ -6,7 +6,14 @@ import { ArrowLeft } from 'react-feather'
 import { Link } from '../../../components/library'
 import { routes } from '../../../constants'
 
-const Header = () => {
+type HeaderProps = {
+  back: {
+    href: object
+    label: string
+  }
+}
+
+const Header = ({ back }: HeaderProps) => {
   const data: any = useContext(GlobalContext)
 
   return (
@@ -27,14 +34,10 @@ const Header = () => {
             </a>
           </Link>
 
-          <Link
-            href={{
-              pathname: routes.home
-            }}
-          >
+          <Link href={back.href}>
             <a className="flex items-center gap-s text-white hover:underline">
               <ArrowLeft size={20} />
-              {"Retour à l'accueil"}
+              {back.label}
             </a>
           </Link>
         </div>
