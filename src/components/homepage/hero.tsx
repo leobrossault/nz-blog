@@ -2,6 +2,7 @@ import { Title } from '../library'
 import { ArrowDownCircle } from 'react-feather'
 import { Media } from '../../types'
 import { getMedia } from '../../api/media'
+import Image from 'next/image'
 
 type HeroProps = {
   logo: Media
@@ -11,8 +12,10 @@ export default function Hero({ logo }: HeroProps) {
   return (
     <section className="relative flex items-center justify-center h-screen">
       <div className="relative flex flex-col items-center gap-xxl">
-        <img
-          className="max-w-[150px]"
+        <Image
+          layout="fixed"
+          width={150}
+          height={85}
           src={getMedia(logo, 'default')}
           alt="Léo & Mathilde - Nouvelle Zélande"
         />

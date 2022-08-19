@@ -5,6 +5,7 @@ import { formatDate } from '../../helpers/dates'
 import { ArrowRight } from 'react-feather'
 import { Title, Text, Link } from '../library'
 import { routes } from '../../constants'
+import Image from 'next/image'
 
 type MinimalArticleProps = {
   slugPlace: string | undefined
@@ -35,7 +36,8 @@ const MinimalArticle = ({
     >
       <a className="flex flex-col gap-m bg-white p-m border rounded-[5px] prose">
         <div className="relative w-full h-[200px]">
-          <img
+          <Image
+            layout="fill"
             className="absolute inset-0 z-0 w-full h-full object-cover"
             src={getMedia(image, 'small')}
             alt={title}

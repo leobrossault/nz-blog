@@ -8,6 +8,7 @@ import Seo from '../../../components/commons/seo/seo'
 import Layout from '../../../components/commons/layout/layout'
 import { getMedia } from '../../../api/media'
 import { Title, Text, Link } from '../../../components/library'
+import Image from 'next/image'
 
 const Slug: NextPage<{ article: Article }> = ({ article }) => {
   const place: any = article.attributes.place?.data
@@ -30,8 +31,9 @@ const Slug: NextPage<{ article: Article }> = ({ article }) => {
           label: 'Retour aux articles'
         }}
       >
-        <div className="relative z-0 top-[-90px] mb-[-90px] grid items-end h-[800px]">
-          <img
+        <div className="relative z-0 top-[-95px] mb-[-95px] grid items-end h-[800px]">
+          <Image
+            layout="fill"
             className="absolute inset-0 z-0 w-full h-full object-cover"
             src={getMedia(article.attributes.main, 'default')}
             alt={article.attributes.title}

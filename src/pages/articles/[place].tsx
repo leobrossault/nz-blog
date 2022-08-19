@@ -8,6 +8,7 @@ import Seo from '../../components/commons/seo/seo'
 import Layout from '../../components/commons/layout/layout'
 import { Title, Text } from '../../components/library'
 import MinimalArticle from '../../components/articles/minimal-article'
+import Image from 'next/image'
 
 const PlacePage: NextPage<{
   place: Place
@@ -25,8 +26,9 @@ const PlacePage: NextPage<{
         useHeader={true}
         back={{ href: { pathname: routes.home }, label: "Retour à l'accueil" }}
       >
-        <div className="relative z-0 top-[-90px] mb-[-90px] grid items-end h-[450px]">
-          <img
+        <div className="relative z-0 top-[-95px] mb-[-95px] grid items-end h-[450px]">
+          <Image
+            layout="fill"
             className="absolute inset-0 z-0 w-full h-full object-cover"
             src={getMedia(place.attributes.image, 'default')}
             alt={place.attributes.title}

@@ -1,6 +1,7 @@
 import { Place } from '../../types'
 import { getMedia } from '../../api/media'
 
+import Image from 'next/image'
 import { Title } from '../library'
 import { Link } from '../../components/library'
 import { routes } from '../../constants'
@@ -21,9 +22,11 @@ const CurrentPlaceLink = ({ place }: CurrentPlaceLinkProps) => {
         }}
       >
         <a className="absolute z-10 top-[200px] right-0 w-1/3 pt-[40%]">
-          <img
+          <Image
+            layout="fill"
             className="absolute inset-0 z-0 w-full h-full object-cover rounded-[5px] shadow-xl"
             src={getMedia(place.attributes.image, 'default')}
+            alt={place.attributes.title}
           />
 
           <div className="absolute right-0 bottom-0 left-0 z-10 flex justify-end p-xl prose bg-black/[.2]">

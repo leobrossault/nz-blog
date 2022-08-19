@@ -16,6 +16,7 @@ import Description from '../components/homepage/description'
 import CurrentPlaceInfos from '../components/homepage/current-place-infos'
 import CurrentPlaceLink from '../components/homepage/current-place-link'
 import MinimalArticle from '../components/articles/minimal-article'
+import Image from 'next/image'
 
 const Map = dynamic(() => import('../components/map/map'), {
   ssr: false
@@ -38,9 +39,11 @@ const Home: NextPage = ({ articles, homepage, places, global }: any) => {
 
       <Layout>
         <div className="relative">
-          <img
+          <Image
+            layout="fill"
             className="absolute inset-0 z-0 w-full h-full object-cover"
             src={getMedia(homepage.attributes.main_photo, 'default')}
+            alt={homepage.attributes.title}
           />
 
           <div className="relative z-1">

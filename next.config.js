@@ -6,6 +6,9 @@ const fullConfig = resolveConfig(tailwindConfig)
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+    domains: ['localhost']
+  },
   env: {
     tailwindConfig: {
       colors: {

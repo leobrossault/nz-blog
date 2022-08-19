@@ -3,6 +3,7 @@ import { GlobalContext } from '../../../pages/_app'
 import { getMedia } from '../../../api/media'
 
 import { ArrowLeft } from 'react-feather'
+import Image from 'next/image'
 import { Link } from '../../../components/library'
 import { routes } from '../../../constants'
 
@@ -26,8 +27,10 @@ const Header = ({ back }: HeaderProps) => {
             }}
           >
             <a>
-              <img
-                className="max-w-[100px]"
+              <Image
+                layout="fixed"
+                width={100}
+                height={57}
                 src={getMedia(data.seo.logo, 'default')}
                 alt="Léo & Mathilde - Nouvelle Zélande"
               />
