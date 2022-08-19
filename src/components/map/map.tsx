@@ -17,10 +17,10 @@ import 'leaflet-defaulticon-compatibility'
 
 type MapProps = {
   places: [Place]
-  setCurrentPlace: Function
+  onMarkerClick: Function
 }
 
-function FitBounds({ places, setCurrentPlace }: any) {
+function FitBounds({ places, onMarkerClick }: any) {
   const map = useMap()
 
   useEffect(() => {
@@ -50,7 +50,7 @@ function FitBounds({ places, setCurrentPlace }: any) {
             iconAnchor: [12, 24]
           })
         }).on('click', function () {
-          setCurrentPlace(
+          onMarkerClick(
             places.find(
               (place: Place) =>
                 +place.attributes.latitude === wp.latLng.lat &&
@@ -74,8 +74,7 @@ function FitBounds({ places, setCurrentPlace }: any) {
   return null
 }
 
-export const Map = ({ places, setCurrentPlace }: MapProps) => {
-  console.log(places)
+export const Map = ({ places, onMarkerClick }: MapProps) => {
   return (
     <MapContainer
       center={[40.8054, -74.0241]}
@@ -85,7 +84,7 @@ export const Map = ({ places, setCurrentPlace }: MapProps) => {
     >
       <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png" />
 
-      <FitBounds places={places} setCurrentPlace={setCurrentPlace} />
+      <FitBounds places={places} onMarkerClick={onMarkerClick} />
     </MapContainer>
   )
 }

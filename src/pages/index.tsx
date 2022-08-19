@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { fetchApi } from '../api'
 import { Article } from '../types'
 import { getMedia } from '../api/media'
+import { Place } from '../types'
 
 import Seo from '../components/commons/seo/seo'
 import Layout from '../components/commons/layout/layout'
@@ -16,11 +17,16 @@ import CurrentPlaceInfos from '../components/homepage/current-place-infos'
 import CurrentPlaceLink from '../components/homepage/current-place-link'
 import MinimalArticle from '../components/articles/minimal-article'
 
+const Map = dynamic(() => import('../components/map/map'), {
+  ssr: false
+})
+
 const Home: NextPage = ({ articles, homepage, places, global }: any) => {
-  const Map = dynamic(() => import('../components/map/map'), {
-    ssr: false
-  })
-  const [currentPlace, setCurrentPlace] = useState()
+  const [currentPlace, setCurrentPlace] = useState<Place | undefined>()
+
+  function onMarkerClick(place: Place) {
+    setCurrentPlace(place)
+  }
 
   return (
     <>
@@ -51,7 +57,7 @@ const Home: NextPage = ({ articles, homepage, places, global }: any) => {
           {currentPlace && <CurrentPlaceInfos place={currentPlace} />}
           {currentPlace && <CurrentPlaceLink place={currentPlace} />}
 
-          <Map places={places} setCurrentPlace={setCurrentPlace} />
+          <Map places={places} onMarkerClick={onMarkerClick} />
         </div>
 
         <div className="container mt-xxl">
