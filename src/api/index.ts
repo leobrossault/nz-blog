@@ -1,6 +1,6 @@
 import qs from 'qs'
 
-const ORIGIN = 'http://localhost:1337'
+const ORIGIN = process.env.API
 
 export const getServerUrl = (path: string) => `${ORIGIN}${path}`
 

@@ -10,6 +10,7 @@ const nextConfig = {
     domains: ['localhost']
   },
   env: {
+    API: process.env.API,
     tailwindConfig: {
       colors: {
         primary: fullConfig.theme.colors.primary
