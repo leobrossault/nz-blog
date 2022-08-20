@@ -1,6 +1,6 @@
 import qs from 'qs'
 
-const ORIGIN = process.env.API
+const ORIGIN = 'https://agile-anchorage-24857.herokuapp.com'
 
 export const getServerUrl = (path: string) => `${ORIGIN}${path}`
 
