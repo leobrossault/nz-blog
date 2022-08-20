@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 import { Place } from '../../types'
+// @ts-ignore
 import { useMap } from 'react-leaflet/hooks'
 import {
   MapContainer,
@@ -26,10 +27,13 @@ function FitBounds({ places, onMarkerClick }: any) {
   useEffect(() => {
     if (!map) return
 
+    // @ts-ignore
     const primaryColor: any = process.env.tailwindConfig?.colors.primary
 
+    // @ts-ignore
     const routingControl = L.Routing.control({
       waypoints: places.map((place: Place) =>
+        // @ts-ignore
         L.latLng(place.attributes.latitude, place.attributes.longitude)
       ),
       createMarker: (i: any, wp: any) => {
