@@ -19,7 +19,7 @@ const Header = ({ back }: HeaderProps) => {
 
   return (
     <header className="relative z-10 py-m">
-      <div className="container">
+      <div className="container px-[5%] xl:px-0">
         <div className="flex items-center justify-between">
           <Link
             href={{

@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
+import { getPlaiceholder } from 'plaiceholder'
 
 import { fetchApi } from '../api'
 import { Article } from '../types'
@@ -22,7 +23,13 @@ const Map = dynamic(() => import('../components/map/map'), {
   ssr: false
 })
 
-const Home: NextPage = ({ articles, homepage, places, global }: any) => {
+const Home: NextPage = ({
+  articles,
+  homepage,
+  places,
+  global,
+  mainImgPlaceholder
+}: any) => {
   const [currentPlace, setCurrentPlace] = useState<Place | undefined>()
 
   function onMarkerClick(place: Place) {
@@ -44,6 +51,9 @@ const Home: NextPage = ({ articles, homepage, places, global }: any) => {
             className="absolute inset-0 z-0 w-full h-full object-cover"
             src={getMedia(homepage.attributes.main_photo, 'default')}
             alt={homepage.attributes.title}
+            blurDataURL={mainImgPlaceholder}
+            placeholder="blur"
+            priority
           />
 
           <div className="relative z-1">
@@ -63,7 +73,7 @@ const Home: NextPage = ({ articles, homepage, places, global }: any) => {
           <Map places={places} onMarkerClick={onMarkerClick} />
         </div>
 
-        <div className="container mt-xxl">
+        <div className="container px-[5%] mt-xxl xl:px-0">
           <div className="text-center prose mb-l">
             <Title tag="h2" className="font-head text-4xl">
               On vous en dit plus
@@ -74,7 +84,7 @@ const Home: NextPage = ({ articles, homepage, places, global }: any) => {
             </Title>
           </div>
 
-          <div className="grid grid-cols-3 gap-m">
+          <div className="grid grid-cols-1 gap-m md:grid-cols-2 xl:grid-cols-3">
             {articles.map((article: Article) => (
               <MinimalArticle
                 key={article.id}
@@ -106,11 +116,17 @@ export async function getStaticProps() {
     populate: ['main_photo', 'photo_us']
   })
 
+  const { base64 } = await getPlaiceholder(
+    getMedia(homepageData.data.attributes.main_photo, 'default'),
+    { size: 10 }
+  )
+
   return {
     props: {
       homepage: homepageData.data,
       places: placesData.data,
-      articles: articlesData.data
+      articles: articlesData.data,
+      mainImgPlaceholder: base64
     }
   }
 }

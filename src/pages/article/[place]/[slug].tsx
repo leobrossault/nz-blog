@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown'
 import { fetchApi } from '../../../api'
 import { Place, Article } from '../../../types'
 import { routes } from '../../../constants'
+import { getPlaiceholder } from 'plaiceholder'
 
 import Seo from '../../../components/commons/seo/seo'
 import Layout from '../../../components/commons/layout/layout'
@@ -10,7 +11,10 @@ import { getMedia } from '../../../api/media'
 import { Title, Text, Link } from '../../../components/library'
 import Image from 'next/image'
 
-const Slug: NextPage<{ article: Article }> = ({ article }) => {
+const Slug: NextPage<{ article: Article; mainImgPlaceholder: string }> = ({
+  article,
+  mainImgPlaceholder
+}) => {
   const place: any = article.attributes.place?.data
 
   return (
@@ -34,13 +38,18 @@ const Slug: NextPage<{ article: Article }> = ({ article }) => {
         <div className="relative z-0 top-[-95px] mb-[-95px] grid items-end h-[800px]">
           <Image
             layout="fill"
-            className="absolute inset-0 z-0 w-full h-full object-cover"
+            className="absolute inset-0 z-0 object-cover"
             src={getMedia(article.attributes.main, 'default')}
+            width={1680}
+            height={800}
             alt={article.attributes.title}
+            blurDataURL={mainImgPlaceholder}
+            placeholder="blur"
+            priority
           />
 
           <div className="relative z-10">
-            <div className="container pb-[400px] prose">
+            <div className="container pb-[400px] prose px-[5%] xl:px-0">
               <Title className="text-white">{article.attributes.title}</Title>
 
               <div>
@@ -105,9 +114,15 @@ export async function getStaticProps({ params }: any) {
     }
   })
 
+  const { base64 } = await getPlaiceholder(
+    getMedia(data[0].attributes.main, 'default'),
+    { size: 10 }
+  )
+
   return {
     props: {
-      article: data[0]
+      article: data[0],
+      mainImgPlaceholder: base64
     }
   }
 }

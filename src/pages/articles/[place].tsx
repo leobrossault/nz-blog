@@ -3,6 +3,7 @@ import { fetchApi } from '../../api'
 import { Article, Place } from '../../types'
 import { getMedia } from '../../api/media'
 import { routes } from '../../constants'
+import { getPlaiceholder } from 'plaiceholder'
 
 import Seo from '../../components/commons/seo/seo'
 import Layout from '../../components/commons/layout/layout'
@@ -13,7 +14,8 @@ import Image from 'next/image'
 const PlacePage: NextPage<{
   place: Place
   articles: Array<Article>
-}> = ({ place, articles }) => {
+  mainImgPlaceholder: string
+}> = ({ place, articles, mainImgPlaceholder }) => {
   return (
     <>
       <Seo
@@ -29,20 +31,24 @@ const PlacePage: NextPage<{
         <div className="relative z-0 top-[-95px] mb-[-95px] grid items-end h-[450px]">
           <Image
             layout="fill"
-            className="absolute inset-0 z-0 w-full h-full object-cover"
+            className="absolute inset-0 z-0 object-cover"
+            width={1680}
+            height={450}
             src={getMedia(place.attributes.image, 'default')}
             alt={place.attributes.title}
+            blurDataURL={mainImgPlaceholder}
+            placeholder="blur"
           />
 
           <div className="relative z-10">
-            <div className="container pb-xl prose">
+            <div className="container pb-xl prose px-[5%] xl:px-0">
               <Title className="text-white">{place.attributes.title}</Title>
             </div>
           </div>
         </div>
 
-        <div className="container mt-xxl">
-          <div className="grid grid-cols-3 gap-m">
+        <div className="container mt-xxl px-[5%] xl:px-0">
+          <div className="grid grid-cols-1 gap-m md:grid-cols-2 xl:grid-cols-3">
             {articles.length ? (
               articles.map((article: Article) => (
                 <MinimalArticle
@@ -95,10 +101,16 @@ export async function getStaticProps({ params }: any) {
     }
   })
 
+  const { base64 } = await getPlaiceholder(
+    getMedia(data[0].attributes.image, 'default'),
+    { size: 10 }
+  )
+
   return {
     props: {
       place: data[0],
-      articles
+      articles,
+      mainImgPlaceholder: base64
     }
   }
 }

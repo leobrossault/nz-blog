@@ -21,7 +21,7 @@ const CurrentPlaceLink = ({ place }: CurrentPlaceLinkProps) => {
           }
         }}
       >
-        <a className="absolute z-10 top-[200px] right-0 w-1/3 pt-[40%]">
+        <a className="absolute z-10 top-[200px] w-[90%] right-[5%] pt-[400px] xl:right-0 lg:w-1/3 xl:pt-[40%]">
           <Image
             layout="fill"
             className="absolute inset-0 z-0 w-full h-full object-cover rounded-[5px] shadow-xl"

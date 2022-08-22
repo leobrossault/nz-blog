@@ -1,6 +1,9 @@
 import qs from 'qs'
 
-const ORIGIN = 'https://agile-anchorage-24857.herokuapp.com'
+const ORIGIN =
+  process.env.NODE_ENV === 'production'
+    ? 'https://agile-anchorage-24857.herokuapp.com'
+    : 'http://localhost:1337'
 
 export const getServerUrl = (path: string) => `${ORIGIN}${path}`
 
