@@ -7,6 +7,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
+    disableStaticImages: true,
     domains: ['localhost', 'agile-anchorage-24857.herokuapp.com']
   },
   env: {

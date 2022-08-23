@@ -32,8 +32,6 @@ const PlacePage: NextPage<{
           <Image
             layout="fill"
             className="absolute inset-0 z-0 object-cover"
-            width={1680}
-            height={450}
             src={getMedia(place.attributes.image, 'default')}
             alt={place.attributes.title}
             blurDataURL={mainImgPlaceholder}
