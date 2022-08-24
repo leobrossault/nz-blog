@@ -48,5 +48,5 @@ export interface Media {
 
 export interface SeoData {
   metatitle: string
-  metadescription: string
+  metadescription?: string
 }
