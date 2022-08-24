@@ -3,7 +3,6 @@ import { fetchApi } from '../../api'
 import { Article, Place } from '../../types'
 import { getMedia } from '../../api/media'
 import { routes } from '../../constants'
-import { getPlaiceholder } from 'plaiceholder'
 
 import Seo from '../../components/commons/seo/seo'
 import Layout from '../../components/commons/layout/layout'
@@ -14,13 +13,13 @@ import Image from 'next/image'
 const PlacePage: NextPage<{
   place: Place
   articles: Array<Article>
-  mainImgPlaceholder: string
-}> = ({ place, articles, mainImgPlaceholder }) => {
+}> = ({ place, articles }) => {
   return (
     <>
       <Seo
         specificSeo={{
-          metatitle: `${place.attributes.title} | Articles`
+          metatitle: `${place.attributes.title} | Articles`,
+          metadescription: `Tous les articles à ${place.attributes.title} en Nouvelle Zélande`
         }}
       />
 
@@ -34,7 +33,7 @@ const PlacePage: NextPage<{
             className="absolute inset-0 z-0 object-cover"
             src={getMedia(place.attributes.image, 'default')}
             alt={place.attributes.title}
-            blurDataURL={mainImgPlaceholder}
+            blurDataURL={place.attributes.image.data.attributes.placeholder}
             placeholder="blur"
           />
 
@@ -99,16 +98,10 @@ export async function getStaticProps({ params }: any) {
     }
   })
 
-  const { base64 } = await getPlaiceholder(
-    getMedia(data[0].attributes.image, 'default'),
-    { size: 10 }
-  )
-
   return {
     props: {
       place: data[0],
-      articles,
-      mainImgPlaceholder: base64
+      articles
     }
   }
 }

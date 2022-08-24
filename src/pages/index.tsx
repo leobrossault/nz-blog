@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
-import { getPlaiceholder } from 'plaiceholder'
 
 import { fetchApi } from '../api'
 import { Article } from '../types'
@@ -23,13 +22,7 @@ const Map = dynamic(() => import('../components/map/map'), {
   ssr: false
 })
 
-const Home: NextPage = ({
-  articles,
-  homepage,
-  places,
-  global,
-  mainImgPlaceholder
-}: any) => {
+const Home: NextPage = ({ articles, homepage, places, global }: any) => {
   const [currentPlace, setCurrentPlace] = useState<Place | undefined>()
 
   function onMarkerClick(place: Place) {
@@ -51,7 +44,9 @@ const Home: NextPage = ({
             className="absolute inset-0 z-0 w-full h-full object-cover"
             src={getMedia(homepage.attributes.main_photo, 'default')}
             alt={homepage.attributes.title}
-            blurDataURL={mainImgPlaceholder}
+            blurDataURL={
+              homepage.attributes.main_photo.data.attributes.placeholder
+            }
             placeholder="blur"
             priority
           />
@@ -116,17 +111,11 @@ export async function getStaticProps() {
     populate: ['main_photo', 'photo_us']
   })
 
-  const { base64 } = await getPlaiceholder(
-    getMedia(homepageData.data.attributes.main_photo, 'default'),
-    { size: 10 }
-  )
-
   return {
     props: {
       homepage: homepageData.data,
       places: placesData.data,
-      articles: articlesData.data,
-      mainImgPlaceholder: base64
+      articles: articlesData.data
     }
   }
 }

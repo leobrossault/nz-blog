@@ -20,6 +20,8 @@ const Description = ({ description, photo }: DescriptionProps) => {
             layout="fill"
             className=" rounded-xl"
             objectFit="cover"
+            blurDataURL={photo.data.attributes.placeholder}
+            placeholder="blur"
           />
         </div>
 

@@ -27,6 +27,8 @@ const CurrentPlaceLink = ({ place }: CurrentPlaceLinkProps) => {
             className="absolute inset-0 z-0 w-full h-full object-cover rounded-[5px] shadow-xl"
             src={getMedia(place.attributes.image, 'default')}
             alt={place.attributes.title}
+            blurDataURL={place.attributes.image.data.attributes.placeholder}
+            placeholder="blur"
           />
 
           <div className="absolute right-0 bottom-0 left-0 z-10 flex justify-end p-xl prose bg-black/[.2]">

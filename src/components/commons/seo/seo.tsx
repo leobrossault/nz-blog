@@ -13,7 +13,8 @@ const Seo = ({ specificSeo }: { specificSeo: SeoData }) => {
 
   const fullSeo = {
     ...seoWithDefaults,
-    metaTitle: `${seoWithDefaults.metatitle} | ${seoWithDefaults.sitetitle}`
+    metaTitle: `${seoWithDefaults.metatitle} | ${seoWithDefaults.sitetitle}`,
+    metaDescription: seoWithDefaults.metadescription
   }
 
   return (

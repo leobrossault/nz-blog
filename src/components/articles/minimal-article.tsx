@@ -41,6 +41,8 @@ const MinimalArticle = ({
             className="absolute inset-0 z-0 w-full h-full object-cover"
             src={getMedia(image, 'small')}
             alt={title}
+            blurDataURL={image.data.attributes.placeholder}
+            placeholder="blur"
           />
         </div>
 

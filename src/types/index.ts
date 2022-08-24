@@ -41,10 +41,12 @@ export interface Media {
       formats: {
         [key: string]: any
       }
+      placeholder: string
     }
   }
 }
 
 export interface SeoData {
   metatitle: string
+  metadescription: string
 }

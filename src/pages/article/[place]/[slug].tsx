@@ -3,7 +3,6 @@ import ReactMarkdown from 'react-markdown'
 import { fetchApi } from '../../../api'
 import { Place, Article } from '../../../types'
 import { routes } from '../../../constants'
-import { getPlaiceholder } from 'plaiceholder'
 
 import Seo from '../../../components/commons/seo/seo'
 import Layout from '../../../components/commons/layout/layout'
@@ -11,17 +10,15 @@ import { getMedia } from '../../../api/media'
 import { Title, Text, Link } from '../../../components/library'
 import Image from 'next/image'
 
-const Slug: NextPage<{ article: Article; mainImgPlaceholder: string }> = ({
-  article,
-  mainImgPlaceholder
-}) => {
+const Slug: NextPage<{ article: Article }> = ({ article }) => {
   const place: any = article.attributes.place?.data
 
   return (
     <>
       <Seo
         specificSeo={{
-          metatitle: article.attributes.title
+          metatitle: article.attributes.title,
+          metadescription: article.attributes.introduction
         }}
       />
 
@@ -43,7 +40,7 @@ const Slug: NextPage<{ article: Article; mainImgPlaceholder: string }> = ({
             width={1680}
             height={800}
             alt={article.attributes.title}
-            blurDataURL={mainImgPlaceholder}
+            blurDataURL={article.attributes.main.data.attributes.placeholder}
             placeholder="blur"
             priority
           />
@@ -114,15 +111,9 @@ export async function getStaticProps({ params }: any) {
     }
   })
 
-  const { base64 } = await getPlaiceholder(
-    getMedia(data[0].attributes.main, 'default'),
-    { size: 10 }
-  )
-
   return {
     props: {
-      article: data[0],
-      mainImgPlaceholder: base64
+      article: data[0]
     }
   }
 }
