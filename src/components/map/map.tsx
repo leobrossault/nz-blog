@@ -32,6 +32,7 @@ function FitBounds({ places, onMarkerClick }: any) {
 
     // @ts-ignore
     const routingControl = L.Routing.control({
+      fitSelectedRoutes: true,
       waypoints: places.map((place: Place) =>
         // @ts-ignore
         L.latLng(place.attributes.latitude, place.attributes.longitude)
@@ -66,13 +67,13 @@ function FitBounds({ places, onMarkerClick }: any) {
       },
       lineOptions: {
         styles: [{ color: primaryColor, opacity: 1, weight: 2 }]
-      }
-      /* ...(process.env.NODE_ENV === 'production' && {
+      },
+      ...(process.env.NODE_ENV === 'production' && {
         // @ts-ignore
         router: L.Routing.mapbox(
           'pk.eyJ1IjoibGVvYnJvc3NhdWx0IiwiYSI6ImNsNnF2d2lrdjBsZmIzZG1tMmYzdWVxZmUifQ.FtNaYvgw4zwel_XTF_oToA'
         )
-      }) */
+      })
     }).addTo(map)
 
     routingControl.hide()
