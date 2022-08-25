@@ -77,10 +77,6 @@ function FitBounds({ places, onMarkerClick }: any) {
     }).addTo(map)
 
     routingControl.hide()
-
-    setTimeout(() => {
-      map.setView([-40.5736809, 166.0018135], 6)
-    }, 500)
   }, [map])
 
   return null
@@ -89,9 +85,9 @@ function FitBounds({ places, onMarkerClick }: any) {
 export const Map = ({ places, onMarkerClick }: MapProps) => {
   return (
     <MapContainer
-      center={[40.8054, -74.0241]}
-      zoom={20}
-      scrollWheelZoom={true}
+      center={[-40.5736809, 166.0018135]}
+      zoom={6}
+      scrollWheelZoom={false}
       style={{ height: '780px', width: '100%' }}
     >
       <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png" />
