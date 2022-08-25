@@ -66,14 +66,13 @@ function FitBounds({ places, onMarkerClick }: any) {
       },
       lineOptions: {
         styles: [{ color: primaryColor, opacity: 1, weight: 2 }]
-      },
-      routeWhileDragging: true,
-      ...(process.env.NODE_ENV === 'production' && {
+      }
+      /* ...(process.env.NODE_ENV === 'production' && {
         // @ts-ignore
         router: L.Routing.mapbox(
           'pk.eyJ1IjoibGVvYnJvc3NhdWx0IiwiYSI6ImNsNnF2d2lrdjBsZmIzZG1tMmYzdWVxZmUifQ.FtNaYvgw4zwel_XTF_oToA'
         )
-      })
+      }) */
     }).addTo(map)
 
     routingControl.hide()
