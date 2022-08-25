@@ -79,16 +79,7 @@ function FitBounds({ places, onMarkerClick }: any) {
     routingControl.hide()
 
     setTimeout(() => {
-      if (places.length < 2) {
-        if (places[0]) {
-          map.setView(
-            [places[0].attributes.latitude, places[0].attributes.longitude],
-            6
-          )
-        } else {
-          map.setView([-40.5736809, 166.0018135], 6)
-        }
-      }
+      map.setView([-40.5736809, 166.0018135], 6)
     }, 500)
   }, [map])
 
