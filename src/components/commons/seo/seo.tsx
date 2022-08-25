@@ -18,8 +18,6 @@ const Seo = ({ specificSeo }: { specificSeo: SeoData }) => {
       seoWithDefaults.metadescription || seoWithDefaults.sitedescription
   }
 
-  console.log(fullSeo)
-
   return (
     <Head>
       {fullSeo.metaTitle && (
