@@ -8,7 +8,11 @@ const nextConfig = {
   swcMinify: true,
   images: {
     disableStaticImages: true,
-    domains: ['localhost', 'agile-anchorage-24857.herokuapp.com']
+    domains: [
+      'localhost',
+      'agile-anchorage-24857.herokuapp.com',
+      'res.cloudinary.com'
+    ]
   },
   env: {
     API: process.env.API,

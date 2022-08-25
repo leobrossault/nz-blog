@@ -5,7 +5,11 @@ const ORIGIN =
     ? 'http://localhost:1337'
     : 'https://agile-anchorage-24857.herokuapp.com'
 
-export const getServerUrl = (path: string) => `${ORIGIN}${path}`
+export const getServerUrl = (path: string) => {
+  if (path.includes('http')) return path
+
+  return `${ORIGIN}${path}`
+}
 
 export async function fetchApi(url: string, params?: object): Promise<any> {
   const headers = {

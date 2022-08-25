@@ -89,7 +89,7 @@ function FitBounds({ places, onMarkerClick }: any) {
           map.setView([-40.5736809, 166.0018135], 6)
         }
       }
-    }, 250)
+    }, 500)
   }, [map])
 
   return null
