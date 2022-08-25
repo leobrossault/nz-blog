@@ -63,7 +63,12 @@ const Home: NextPage = ({ articles, homepage, places, global }: any) => {
 
         <div className="relative">
           {currentPlace && <CurrentPlaceInfos place={currentPlace} />}
-          {currentPlace && <CurrentPlaceLink place={currentPlace} />}
+          {currentPlace && (
+            <CurrentPlaceLink
+              place={currentPlace}
+              setCurrentPlace={setCurrentPlace}
+            />
+          )}
 
           <Map places={places} onMarkerClick={onMarkerClick} />
         </div>

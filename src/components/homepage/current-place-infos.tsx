@@ -9,7 +9,7 @@ const CurrentPlaceInfos = ({ place }: CurrentPlaceInfosProps) => {
   return (
     <div className="container relative">
       <div className="absolute z-10 top-0 inset-x-0 xl:top-[30px]">
-        <div className="flex items-center justify-between w-full bg-white py-xl px-xxl rounded-[5px] shadow-xl">
+        <div className="flex flex-col sm:flex-row items-center justify-between w-full bg-white py-xl px-xxl rounded-[5px] shadow-xl">
           <p className="font-head text-2xl">{place?.attributes.title}</p>
 
           <div className="text-center">
