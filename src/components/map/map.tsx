@@ -37,10 +37,11 @@ function FitBounds({ places, onMarkerClick }: any) {
         L.latLng(place.attributes.latitude, place.attributes.longitude)
       ),
       createMarker: (i: any, wp: any) => {
-        return L.marker(wp.latLng, {
+        const marker = L.marker(wp.latLng, {
           icon: L.divIcon({
             html: `
               <svg
+                aria-label="${wp.title}"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -62,6 +63,10 @@ function FitBounds({ places, onMarkerClick }: any) {
             )
           )
         })
+
+        console.log(marker)
+
+        return marker
       },
       lineOptions: {
         styles: [{ color: primaryColor, opacity: 1, weight: 2 }]

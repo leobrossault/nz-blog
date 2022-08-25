@@ -43,7 +43,7 @@ const Home: NextPage = ({ articles, homepage, places, global }: any) => {
             layout="fill"
             className="absolute inset-0 z-0 w-full h-full object-cover"
             src={getMedia(homepage.attributes.main_photo, 'default')}
-            alt={homepage.attributes.title}
+            alt=""
             blurDataURL={
               homepage.attributes.main_photo.data.attributes.placeholder
             }
