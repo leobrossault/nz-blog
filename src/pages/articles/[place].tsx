@@ -19,7 +19,8 @@ const PlacePage: NextPage<{
       <Seo
         specificSeo={{
           metatitle: `${place.attributes.title} | Articles`,
-          metadescription: `Tous les articles à ${place.attributes.title} en Nouvelle Zélande`
+          metadescription: `Tous les articles à ${place.attributes.title} en Nouvelle Zélande`,
+          metaimage: place.attributes.image
         }}
       />
 

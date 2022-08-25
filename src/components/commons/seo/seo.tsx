@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useContext } from 'react'
 import { GlobalContext } from '../../../pages/_app'
 import { SeoData } from '../../../types'
+import { getMedia } from '../../../api/media'
 
 const Seo = ({ specificSeo }: { specificSeo: SeoData }) => {
   const { seo }: any = useContext(GlobalContext)
@@ -15,7 +16,11 @@ const Seo = ({ specificSeo }: { specificSeo: SeoData }) => {
     ...seoWithDefaults,
     metaTitle: `${seoWithDefaults.metatitle} | ${seoWithDefaults.sitetitle}`,
     metaDescription:
-      seoWithDefaults.metadescription || seoWithDefaults.sitedescription
+      seoWithDefaults.metadescription || seoWithDefaults.sitedescription,
+    metaImage: getMedia(
+      seoWithDefaults.metaimage || seoWithDefaults.logo,
+      'default'
+    )
   }
 
   return (
@@ -33,6 +38,9 @@ const Seo = ({ specificSeo }: { specificSeo: SeoData }) => {
           <meta property="og:description" content={fullSeo.metaDescription} />
           <meta name="twitter:description" content={fullSeo.metaDescription} />
         </>
+      )}
+      {fullSeo.metaImage && (
+        <meta property="og:image" content={fullSeo.metaImage} />
       )}
       {fullSeo.article && <meta property="og:type" content="article" />}
       <meta name="twitter:card" content="summary_large_image" />

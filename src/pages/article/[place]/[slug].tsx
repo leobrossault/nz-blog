@@ -18,7 +18,8 @@ const Slug: NextPage<{ article: Article }> = ({ article }) => {
       <Seo
         specificSeo={{
           metatitle: article.attributes.title,
-          metadescription: article.attributes.introduction
+          metadescription: article.attributes.introduction,
+          metaimage: article.attributes.main
         }}
       />
 
