@@ -68,13 +68,28 @@ function FitBounds({ places, onMarkerClick }: any) {
         styles: [{ color: primaryColor, opacity: 1, weight: 2 }]
       },
       routeWhileDragging: true,
-      // @ts-ignore
-      router: L.Routing.mapbox(
-        'pk.eyJ1IjoibGVvYnJvc3NhdWx0IiwiYSI6ImNsNnF2d2lrdjBsZmIzZG1tMmYzdWVxZmUifQ.FtNaYvgw4zwel_XTF_oToA'
-      )
+      ...(process.env.NODE_ENV === 'production' && {
+        // @ts-ignore
+        router: L.Routing.mapbox(
+          'pk.eyJ1IjoibGVvYnJvc3NhdWx0IiwiYSI6ImNsNnF2d2lrdjBsZmIzZG1tMmYzdWVxZmUifQ.FtNaYvgw4zwel_XTF_oToA'
+        )
+      })
     }).addTo(map)
 
     routingControl.hide()
+
+    setTimeout(() => {
+      if (places.length < 2) {
+        if (places[0]) {
+          map.setView(
+            [places[0].attributes.latitude, places[0].attributes.longitude],
+            6
+          )
+        } else {
+          map.setView([-40.5736809, 166.0018135], 6)
+        }
+      }
+    }, 250)
   }, [map])
 
   return null
