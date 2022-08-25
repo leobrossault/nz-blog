@@ -37,7 +37,7 @@ function FitBounds({ places, onMarkerClick }: any) {
         L.latLng(place.attributes.latitude, place.attributes.longitude)
       ),
       createMarker: (i: any, wp: any) => {
-        const marker = L.marker(wp.latLng, {
+        return L.marker(wp.latLng, {
           icon: L.divIcon({
             html: `
               <svg
@@ -63,18 +63,15 @@ function FitBounds({ places, onMarkerClick }: any) {
             )
           )
         })
-
-        console.log(marker)
-
-        return marker
       },
       lineOptions: {
         styles: [{ color: primaryColor, opacity: 1, weight: 2 }]
       },
-      routeWhileDragging: true
-      /* router: L.Routing.mapbox(
+      routeWhileDragging: true,
+      // @ts-ignore
+      router: L.Routing.mapbox(
         'pk.eyJ1IjoibGVvYnJvc3NhdWx0IiwiYSI6ImNsNnF2d2lrdjBsZmIzZG1tMmYzdWVxZmUifQ.FtNaYvgw4zwel_XTF_oToA'
-      ), */
+      )
     }).addTo(map)
 
     routingControl.hide()
