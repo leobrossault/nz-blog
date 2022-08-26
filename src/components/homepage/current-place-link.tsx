@@ -16,7 +16,7 @@ const CurrentPlaceLink = ({
   place,
   setCurrentPlace
 }: CurrentPlaceLinkProps) => {
-  function onClick(e) {
+  function onClick(e: any) {
     e.preventDefault()
 
     setCurrentPlace(undefined)
