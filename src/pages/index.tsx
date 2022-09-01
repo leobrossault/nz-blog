@@ -6,10 +6,12 @@ import { fetchApi } from '../api'
 import { Article } from '../types'
 import { getMedia } from '../api/media'
 import { Place } from '../types'
+import { routes } from '../constants'
 
 import Seo from '../components/commons/seo/seo'
 import Layout from '../components/commons/layout/layout'
-import { Title } from '../components/library'
+import { Title, Link } from '../components/library'
+import { ArrowRight } from 'react-feather'
 
 import Hero from '../components/homepage/hero'
 import Description from '../components/homepage/description'
@@ -89,13 +91,23 @@ const Home: NextPage = ({ articles, homepage, places, global }: any) => {
               <MinimalArticle
                 key={article.id}
                 title={article.attributes.title}
-                slugPlace={article.attributes.place?.data.attributes.slug}
+                place={article.attributes.place?.data}
                 image={article.attributes.main}
                 introduction={article.attributes.introduction}
                 slug={article.attributes.slug}
                 date={article.attributes.createdAt}
+                showPlace={true}
               />
             ))}
+          </div>
+
+          <div className="flex justify-end mt-l">
+            <Link href={{ pathname: routes.allArticles }}>
+              <a className="flex items-center gap-s text-slate-500 hover:underline">
+                Voir tous les articles
+                <ArrowRight size={20} />
+              </a>
+            </Link>
           </div>
         </div>
       </Layout>
@@ -107,6 +119,7 @@ export default Home
 
 export async function getStaticProps() {
   const articlesData = await fetchApi('articles', {
+    sort: 'createdAt:desc',
     populate: ['main', 'place']
   })
   const placesData = await fetchApi('places', {

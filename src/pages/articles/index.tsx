@@ -1,26 +1,25 @@
 import type { NextPage } from 'next'
 import { fetchApi } from '../../api'
-import { Article, Place } from '../../types'
+import { Article, AllArticlePage } from '../../types'
 import { getMedia } from '../../api/media'
 import { routes } from '../../constants'
 
 import Seo from '../../components/commons/seo/seo'
 import Layout from '../../components/commons/layout/layout'
-import { Title, Text } from '../../components/library'
-import MinimalArticle from '../../components/articles/minimal-article'
 import Image from 'next/image'
+import { Text, Title } from '../../components/library'
+import MinimalArticle from '../../components/articles/minimal-article'
 
-const PlacePage: NextPage<{
-  place: Place
-  articles: Array<Article>
-}> = ({ place, articles }) => {
+const AllArticlesPage: NextPage<{
+  page: AllArticlePage
+  articles: any
+}> = ({ page, articles }) => {
   return (
     <>
       <Seo
         specificSeo={{
-          metatitle: `${place.attributes.title} | Articles`,
-          metadescription: `Tous les articles à ${place.attributes.title} en Nouvelle Zélande`,
-          metaimage: place.attributes.image
+          metatitle: 'Tous les articles',
+          metadescription: `Tous les articles`
         }}
       />
 
@@ -32,15 +31,15 @@ const PlacePage: NextPage<{
           <Image
             layout="fill"
             className="absolute inset-0 z-0 object-cover"
-            src={getMedia(place.attributes.image, 'default')}
-            alt={place.attributes.title}
-            blurDataURL={place.attributes.image.data.attributes.placeholder}
+            src={getMedia(page.attributes.image, 'default')}
+            alt={page.attributes.title}
+            blurDataURL={page.attributes.image.data.attributes.placeholder}
             placeholder="blur"
           />
 
           <div className="relative z-10">
             <div className="container pb-xl prose px-[5%] xl:px-0">
-              <Title className="text-white">{place.attributes.title}</Title>
+              <Title className="text-white">{page.attributes.title}</Title>
             </div>
           </div>
         </div>
@@ -57,6 +56,7 @@ const PlacePage: NextPage<{
                   introduction={article.attributes.introduction}
                   slug={article.attributes.slug}
                   date={article.attributes.createdAt}
+                  showPlace={true}
                 />
               ))
             ) : (
@@ -69,41 +69,25 @@ const PlacePage: NextPage<{
   )
 }
 
-export default PlacePage
+export default AllArticlesPage
 
-export async function getStaticPaths() {
-  const placesRes = await fetchApi('places')
-
-  return {
-    paths: placesRes.data.map((place: any) => ({
-      params: {
-        place: place.attributes.slug
-      }
-    })),
-    fallback: false
-  }
-}
-
-export async function getStaticProps({ params }: any) {
-  const { data } = await fetchApi('places', {
-    populate: ['image'],
-    filters: {
-      slug: params.place
-    }
+export async function getStaticProps() {
+  const { data: page } = await fetchApi('all-article', {
+    populate: ['image']
   })
 
-  const { data: articles } = await fetchApi('articles', {
+  const { data } = await fetchApi('articles', {
     sort: 'createdAt:desc',
-    populate: ['main', 'place'],
-    filters: {
-      place: data[0].id
-    }
+    populate: ['main', 'place']
+    /* pagination: {
+      pageSize: 1
+    } */
   })
 
   return {
     props: {
-      place: data[0],
-      articles
+      page,
+      articles: data
     }
   }
 }

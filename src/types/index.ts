@@ -51,3 +51,11 @@ export interface SeoData {
   metadescription?: string
   metaimage?: Media
 }
+
+export interface AllArticlePage {
+  id: number
+  attributes: {
+    title: string
+    image: Media
+  }
+}

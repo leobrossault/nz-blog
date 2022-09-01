@@ -1,4 +1,4 @@
-import { Media } from '../../types'
+import { Media, Place } from '../../types'
 import { getMedia } from '../../api/media'
 import { formatDate } from '../../helpers/dates'
 
@@ -8,28 +8,30 @@ import { routes } from '../../constants'
 import Image from 'next/image'
 
 type MinimalArticleProps = {
-  slugPlace: string | undefined
+  place: Place | undefined
   title: string
   image: Media
   introduction: string
   slug: string
   date: string
+  showPlace?: boolean
 }
 
 const MinimalArticle = ({
-  slugPlace,
+  place,
   title,
   image,
   introduction,
   slug,
-  date
+  date,
+  showPlace
 }: MinimalArticleProps) => {
   return (
     <Link
       href={{
         pathname: routes.article,
         query: {
-          place: slugPlace,
+          place: place?.attributes.slug,
           slug
         }
       }}
@@ -47,9 +49,17 @@ const MinimalArticle = ({
         </div>
 
         <div className="px-l">
-          <Text className="text-slate-500 text-sm">
-            Publié le {formatDate(date)}
-          </Text>
+          <div className="flex items-center gap-xs">
+            <Text className="text-slate-500 text-sm">
+              Publié le {formatDate(date)}
+            </Text>
+
+            {showPlace && (
+              <Text className="text-slate-500 text-sm">
+                à {place?.attributes.title}
+              </Text>
+            )}
+          </div>
 
           <Title tag="h3">{title}</Title>
 

@@ -25,7 +25,9 @@ const Description = ({ description, photo }: DescriptionProps) => {
           />
         </div>
 
-        <Text className="text-white">{description}</Text>
+        <Text className="text-white whitespace-pre-line text-justify">
+          {description}
+        </Text>
       </div>
     </section>
   )
