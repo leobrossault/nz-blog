@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.sur-la-route-d-aotearoa.fr/
+
+# Sitemaps
+Sitemap: https://www.sur-la-route-d-aotearoa.fr/sitemap.xml

@@ -1,7 +1,7 @@
 import NextLink from 'next/link'
 
 type LinkProps = {
-  href: object
+  href: object | string
   className?: string
   children: any
 }

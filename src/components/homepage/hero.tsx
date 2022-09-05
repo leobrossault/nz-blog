@@ -1,4 +1,4 @@
-import { Title } from '../library'
+import { Title, Link } from '../library'
 import { ArrowDownCircle } from 'react-feather'
 import { Media } from '../../types'
 import { getMedia } from '../../api/media'
@@ -29,9 +29,11 @@ export default function Hero({ logo }: HeroProps) {
         </div>
       </div>
 
-      <div className="absolute bottom-xl left-1/2 -translate-x-1/2 text-white">
-        <ArrowDownCircle size={30} className="animate-bounce" />
-      </div>
+      <Link href="#description">
+        <a className="absolute bottom-xl left-1/2 -translate-x-1/2 text-white">
+          <ArrowDownCircle size={30} className="animate-bounce" />
+        </a>
+      </Link>
     </section>
   )
 }

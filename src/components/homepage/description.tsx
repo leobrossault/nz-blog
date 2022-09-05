@@ -11,7 +11,7 @@ type DescriptionProps = {
 
 const Description = ({ description, photo }: DescriptionProps) => {
   return (
-    <section className="container px-[5%] py-[120px] xl:px-0">
+    <section id="description" className="container px-[5%] py-[120px] xl:px-0">
       <div className="grid grid-cols-1 items-end gap-xxl prose lg:grid-cols-[25%_1fr]">
         <div className="relative h-[400px]">
           <Image
