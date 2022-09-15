@@ -137,3 +137,11 @@
 .leaflet-container {
     z-index: 1;
 }
+
+.content-article img {
+    @apply block my-l mx-auto;
+}
+
+.react-images__view-wrapper img {
+    @apply mx-auto;
+}

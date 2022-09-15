@@ -36,9 +36,9 @@ const CurrentPlaceLink = ({
           <Image
             layout="fill"
             className="absolute inset-0 z-0 w-full h-full object-cover rounded-[5px] shadow-xl"
-            src={getMedia(place.attributes.image, 'default')}
+            src={getMedia(place.attributes.map_image, 'default')}
             alt={place.attributes.title}
-            blurDataURL={place.attributes.image.data.attributes.placeholder}
+            blurDataURL={place.attributes.map_image.data.attributes.placeholder}
             placeholder="blur"
           />
 

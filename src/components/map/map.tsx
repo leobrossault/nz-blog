@@ -2,13 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import { Place } from '../../types'
 // @ts-ignore
 import { useMap } from 'react-leaflet/hooks'
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  FeatureGroup
-} from 'react-leaflet'
+import { MapContainer, TileLayer } from 'react-leaflet'
 import 'leaflet-routing-machine'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -29,14 +23,16 @@ function FitBounds({ places, onMarkerClick }: any) {
 
     // @ts-ignore
     const primaryColor: any = process.env.tailwindConfig?.colors.primary
+    const markers = places.map((place: Place) =>
+      // @ts-ignore
+      L.latLng(place.attributes.latitude, place.attributes.longitude)
+    )
+    const bounds = L.latLngBounds(markers)
 
     // @ts-ignore
     const routingControl = L.Routing.control({
-      fitSelectedRoutes: true,
-      waypoints: places.map((place: Place) =>
-        // @ts-ignore
-        L.latLng(place.attributes.latitude, place.attributes.longitude)
-      ),
+      fitSelectedRoutes: 'smart',
+      waypoints: markers,
       createMarker: (i: any, wp: any) => {
         return L.marker(wp.latLng, {
           icon: L.divIcon({
@@ -77,6 +73,9 @@ function FitBounds({ places, onMarkerClick }: any) {
     }).addTo(map)
 
     routingControl.hide()
+
+    map.fitBounds(bounds)
+    map.setZoom(6)
   }, [map])
 
   return null

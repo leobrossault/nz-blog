@@ -20,7 +20,7 @@ const PlacePage: NextPage<{
         specificSeo={{
           metatitle: `${place.attributes.title} | Articles`,
           metadescription: `Tous les articles à ${place.attributes.title} en Nouvelle Zélande`,
-          metaimage: place.attributes.image
+          metaimage: place.attributes.banner_image
         }}
       />
 
@@ -32,9 +32,11 @@ const PlacePage: NextPage<{
           <Image
             layout="fill"
             className="absolute inset-0 z-0 object-cover"
-            src={getMedia(place.attributes.image, 'default')}
+            src={getMedia(place.attributes.banner_image, 'default')}
             alt={place.attributes.title}
-            blurDataURL={place.attributes.image.data.attributes.placeholder}
+            blurDataURL={
+              place.attributes.banner_image.data.attributes.placeholder
+            }
             placeholder="blur"
           />
 
@@ -86,7 +88,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }: any) {
   const { data } = await fetchApi('places', {
-    populate: ['image'],
+    populate: ['banner_image'],
     filters: {
       slug: params.place
     }

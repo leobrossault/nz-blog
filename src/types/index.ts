@@ -7,7 +7,9 @@ export interface Article {
     slug: string
     createdAt: string
     main: Media
-    images?: Media[] | undefined
+    images?: {
+      data?: Media[] | undefined
+    }
     place?: {
       data: Place
     }
@@ -22,7 +24,8 @@ export interface Place {
     slug: string
     latitude: string
     longitude: string
-    image: Media
+    map_image: Media
+    banner_image: Media
     start: string
     end?: string
   }
@@ -42,6 +45,7 @@ export interface Media {
         [key: string]: any
       }
       placeholder: string
+      caption: string
     }
   }
 }

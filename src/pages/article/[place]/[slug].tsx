@@ -9,6 +9,7 @@ import Layout from '../../../components/commons/layout/layout'
 import { getMedia } from '../../../api/media'
 import { Title, Text, Link } from '../../../components/library'
 import Image from 'next/image'
+import Gallery from '../../../components/commons/gallery/gallery'
 
 const Slug: NextPage<{ article: Article }> = ({ article }) => {
   const place: any = article.attributes.place?.data
@@ -69,8 +70,17 @@ const Slug: NextPage<{ article: Article }> = ({ article }) => {
           </div>
         </div>
 
-        <div className="relative z-10 top-[-350px] container mb-[-250px] py-xl px-xxl bg-white min-h-[500px] rounded-md prose-article">
-          <ReactMarkdown>{article.attributes.body}</ReactMarkdown>
+        <div className="relative z-10 top-[-350px] container mb-[-250px] py-xl px-xxl bg-white min-h-[500px] rounded-md">
+          <div className="content-article prose-article mb-l">
+            <ReactMarkdown>{article.attributes.body}</ReactMarkdown>
+          </div>
+
+          <Gallery
+            // @ts-ignore
+            photos={article.attributes.images?.data.map((media: any) => ({
+              data: media
+            }))}
+          />
         </div>
       </Layout>
     </>

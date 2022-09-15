@@ -1,7 +1,7 @@
 {
-    "name": "Sur la route - NZ",
-    "short_name": "Sur la route - NZ",
-    "start_url": "https://nz-blog.vercel.app/",
+    "name": "Sur la route d'Aotearoa",
+    "short_name": "Sur la route d'Aotearoa",
+    "start_url": "https://www.sur-la-route-d-aotearoa.fr/",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

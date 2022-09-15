@@ -123,7 +123,7 @@ export async function getStaticProps() {
     populate: ['main', 'place']
   })
   const placesData = await fetchApi('places', {
-    populate: ['image'],
+    populate: ['map_image'],
     filters: {
       enable_on_map: true
     }
