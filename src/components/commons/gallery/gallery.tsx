@@ -1,34 +1,27 @@
 import { Media } from '../../../types'
-import Carousel, { Modal, ModalGateway } from 'react-images'
-import { useCallback, useState } from 'react'
 import { getMedia } from '../../../api/media'
 import Image from 'next/image'
+import Lightbox from 'react-image-lightbox'
+import 'react-image-lightbox/style.css'
+import { useState } from 'react'
 
 type GalleryProps = {
   photos: Array<Media>
 }
 
 const Gallery = ({ photos }: GalleryProps) => {
-  const formattedPhotos = photos.map(photo => ({
-    src: getMedia(photo),
-    caption: photo.data.attributes.caption
-  }))
+  const [photoIndex, setPhotoIndex] = useState<number>(0)
+  const [isOpen, setOpenState] = useState<boolean>(false)
 
-  const [currentImage, setCurrentImage] = useState(0)
-  const [viewerIsOpen, setViewerIsOpen] = useState(false)
-
-  const openLightbox = useCallback((index: number) => {
-    setCurrentImage(index)
-    setViewerIsOpen(true)
-  }, [])
-
-  const closeLightbox = () => {
-    setCurrentImage(0)
-    setViewerIsOpen(false)
+  function openLightbox(index: number) {
+    setOpenState(true)
+    setPhotoIndex(index)
   }
 
-  // @ts-ignore
-  // @ts-ignore
+  function closeLightbox() {
+    setOpenState(false)
+  }
+
   return (
     <div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-xs">
@@ -52,21 +45,22 @@ const Gallery = ({ photos }: GalleryProps) => {
         ))}
       </div>
 
-      {/*
-       // @ts-ignore */}
-      <ModalGateway>
-        {viewerIsOpen && (
-          <Modal onClose={closeLightbox}>
-            <Carousel
-              currentIndex={currentImage}
-              views={formattedPhotos.map((x: any) => ({
-                ...x,
-                caption: x.caption
-              }))}
-            />
-          </Modal>
-        )}
-      </ModalGateway>
+      {isOpen && (
+        <Lightbox
+          mainSrc={getMedia(photos[photoIndex])}
+          nextSrc={getMedia(photos[(photoIndex + 1) % photos.length])}
+          prevSrc={getMedia(
+            photos[(photoIndex + photos.length - 1) % photos.length]
+          )}
+          onMovePrevRequest={() => {
+            setPhotoIndex((photoIndex + photos.length - 1) % photos.length)
+          }}
+          onMoveNextRequest={() => {
+            setPhotoIndex((photoIndex + 1) % photos.length)
+          }}
+          onCloseRequest={closeLightbox}
+        />
+      )}
     </div>
   )
 }
