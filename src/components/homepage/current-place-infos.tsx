@@ -1,5 +1,5 @@
 import { Place } from '../../types'
-import { formatDate, formatDateFromNz } from '../../helpers/dates'
+import { formatDate, formatDateTz } from '../../helpers/dates'
 
 type CurrentPlaceInfosProps = {
   place: Place
@@ -14,7 +14,7 @@ const CurrentPlaceInfos = ({ place }: CurrentPlaceInfosProps) => {
 
           <div className="text-center">
             <p className="font-head text-2xl">
-              {formatDateFromNz(Date.now(), 'HH:mm')}
+              {formatDateTz(Date.now(), 'HH:mm', place.attributes.timezone)}
             </p>
 
             <p className="font-secondHead text-xl font-extralight">

@@ -54,9 +54,9 @@ const MinimalArticle = ({
               Publié le {formatDate(date)}
             </Text>
 
-            {showPlace && (
+            {showPlace && place?.attributes.title && (
               <Text className="text-slate-500 text-sm">
-                à {place?.attributes.title}
+                | {place?.attributes.title}
               </Text>
             )}
           </div>

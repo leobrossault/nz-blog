@@ -18,7 +18,7 @@ const Header = ({ back }: HeaderProps) => {
   const data: any = useContext(GlobalContext)
 
   return (
-    <header className="relative z-10 py-m">
+    <header className="relative z-10 py-m bg-black bg-opacity-5">
       <div className="container px-[5%] xl:px-0">
         <div className="flex items-center justify-between">
           <Link

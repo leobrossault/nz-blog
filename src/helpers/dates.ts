@@ -13,5 +13,11 @@ dayjs.extend(tz)
 export const formatDate = (date: number | string, format: string = 'L') =>
   dayjs(date).format(format)
 
-export const formatDateFromNz = (date: number, format: string = 'L') =>
-  dayjs(date).tz('Pacific/Auckland').format(format)
+export const formatDateTz = (
+  date: number,
+  format: string = 'L',
+  tz: string | undefined
+) =>
+  dayjs(date)
+    .tz(tz || 'Pacific/Auckland')
+    .format(format)

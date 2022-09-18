@@ -42,7 +42,9 @@ const PlacePage: NextPage<{
 
           <div className="relative z-10">
             <div className="container pb-xl prose px-[5%] xl:px-0">
-              <Title className="text-white">{place.attributes.title}</Title>
+              <div className="inline-block py-s px-xl rounded-xl bg-black bg-opacity-5">
+                <Title className="text-white">{place.attributes.title}</Title>
+              </div>
             </div>
           </div>
         </div>

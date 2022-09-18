@@ -28,6 +28,7 @@ export interface Place {
     banner_image: Media
     start: string
     end?: string
+    timezone: string | undefined
   }
 }
 
