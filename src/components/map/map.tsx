@@ -75,7 +75,6 @@ function FitBounds({ places, onMarkerClick }: any) {
     routingControl.hide()
 
     map.fitBounds(bounds)
-    map.setZoom(6)
   }, [map])
 
   return null
@@ -86,6 +85,7 @@ export const Map = ({ places, onMarkerClick }: MapProps) => {
     <MapContainer
       center={[-40.5736809, 166.0018135]}
       zoom={6}
+      maxZoom={10}
       scrollWheelZoom={false}
       style={{ height: '780px', width: '100%' }}
     >

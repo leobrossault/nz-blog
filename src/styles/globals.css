@@ -138,6 +138,10 @@
     z-index: 1;
 }
 
+.content-article {
+    white-space: pre-wrap;
+}
+
 .content-article img {
     @apply block my-l mx-auto;
 }
