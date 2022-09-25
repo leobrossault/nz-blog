@@ -73,9 +73,12 @@ const Slug: NextPage<{ article: Article }> = ({ article }) => {
         </div>
 
         <div className="relative z-10 top-[-350px] container mb-[-250px] py-xl px-xxl bg-white min-h-[500px] rounded-md">
-          <div className="content-article prose-article mb-l">
-            <ReactMarkdown>{article.attributes.body}</ReactMarkdown>
-          </div>
+          <div
+            className="content-article prose-article mb-l"
+            dangerouslySetInnerHTML={{
+              __html: article.attributes.body.replace(/\n/gi, '&nbsp; \n')
+            }}
+          ></div>
 
           <Gallery
             // @ts-ignore
