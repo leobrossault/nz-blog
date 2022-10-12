@@ -120,7 +120,10 @@ export default Home
 export async function getStaticProps() {
   const articlesData = await fetchApi('articles', {
     sort: 'createdAt:desc',
-    populate: ['main', 'place']
+    populate: ['main', 'place'],
+    pagination: {
+      limit: 6
+    }
   })
   const placesData = await fetchApi('places', {
     populate: ['map_image'],
