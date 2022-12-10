@@ -17,18 +17,29 @@ export interface Article {
   }
 }
 
+export interface ArticleMap {
+  id: number
+  attributes: {
+    title: string
+    createdAt: string
+    latitude: string
+    longitude: string
+    enable_on_map: boolean
+    map_image: Media
+    slug: string
+    timezone: string
+    place?: {
+      data: Place
+    }
+  }
+}
+
 export interface Place {
   id: number
   attributes: {
     title: string
     slug: string
-    latitude: string
-    longitude: string
-    map_image: Media
     banner_image: Media
-    start: string
-    end?: string
-    timezone: string | undefined
   }
 }
 

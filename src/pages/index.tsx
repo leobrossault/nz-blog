@@ -3,9 +3,8 @@ import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
 import { fetchApi } from '../api'
-import { Article } from '../types'
+import { Article, ArticleMap } from '../types'
 import { getMedia } from '../api/media'
-import { Place } from '../types'
 import { routes } from '../constants'
 
 import Seo from '../components/commons/seo/seo'
@@ -25,9 +24,9 @@ const Map = dynamic(() => import('../components/map/map'), {
 })
 
 const Home: NextPage = ({ articles, homepage, places, global }: any) => {
-  const [currentPlace, setCurrentPlace] = useState<Place | undefined>()
+  const [currentPlace, setCurrentPlace] = useState<ArticleMap | undefined>()
 
-  function onMarkerClick(place: Place) {
+  function onMarkerClick(place: ArticleMap) {
     setCurrentPlace(place)
   }
 
@@ -125,8 +124,8 @@ export async function getStaticProps() {
       limit: 6
     }
   })
-  const placesData = await fetchApi('places', {
-    populate: ['map_image'],
+  const placesData = await fetchApi('articles', {
+    populate: ['map_image', 'place'],
     filters: {
       enable_on_map: true
     }

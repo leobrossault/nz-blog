@@ -1,8 +1,8 @@
-import { Place } from '../../types'
+import { ArticleMap } from '../../types'
 import { formatDate, formatDateTz } from '../../helpers/dates'
 
 type CurrentPlaceInfosProps = {
-  place: Place
+  place: ArticleMap
 }
 
 const CurrentPlaceInfos = ({ place }: CurrentPlaceInfosProps) => {
@@ -24,24 +24,9 @@ const CurrentPlaceInfos = ({ place }: CurrentPlaceInfosProps) => {
 
           <div className="text-center">
             <p className="font-head text-2xl">
-              {formatDate(place?.attributes.start!, 'DD/MM/YYYY')}
-            </p>
-
-            <p className="font-secondHead text-xl font-extralight">
-              {`Date d'arrivée`}
+              {formatDate(place?.attributes.createdAt!, 'DD/MM/YYYY')}
             </p>
           </div>
-
-          {place?.attributes.end && (
-            <div>
-              <p className="font-head text-2xl">
-                {formatDate(place?.attributes.end, 'DD/MM/YYYY')}
-              </p>
-              <p className="font-secondHead text-xl font-extralight">
-                Date de départ
-              </p>
-            </div>
-          )}
         </div>
       </div>
     </div>

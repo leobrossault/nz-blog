@@ -1,4 +1,4 @@
-import { Place } from '../../types'
+import { ArticleMap } from '../../types'
 import { getMedia } from '../../api/media'
 import { X } from 'react-feather'
 
@@ -8,7 +8,7 @@ import { Link } from '../../components/library'
 import { routes } from '../../constants'
 
 type CurrentPlaceLinkProps = {
-  place: Place
+  place: ArticleMap
   setCurrentPlace: Function
 }
 
@@ -26,9 +26,10 @@ const CurrentPlaceLink = ({
     <div className="container relative">
       <Link
         href={{
-          pathname: routes.articles,
+          pathname: routes.article,
           query: {
-            place: place.attributes.slug
+            place: place.attributes.place?.data.attributes.slug,
+            slug: place.attributes.slug
           }
         }}
       >

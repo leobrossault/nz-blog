@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import { Place } from '../../types'
+import { ArticleMap } from '../../types'
 // @ts-ignore
 import { useMap } from 'react-leaflet/hooks'
 import { MapContainer, TileLayer } from 'react-leaflet'
@@ -11,7 +11,7 @@ import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
 import 'leaflet-defaulticon-compatibility'
 
 type MapProps = {
-  places: [Place]
+  places: [ArticleMap]
   onMarkerClick: Function
 }
 
@@ -23,7 +23,7 @@ function FitBounds({ places, onMarkerClick }: any) {
 
     // @ts-ignore
     const primaryColor: any = process.env.tailwindConfig?.colors.primary
-    const markers = places.map((place: Place) =>
+    const markers = places.map((place: ArticleMap) =>
       // @ts-ignore
       L.latLng(place.attributes.latitude, place.attributes.longitude)
     )
@@ -54,7 +54,7 @@ function FitBounds({ places, onMarkerClick }: any) {
         }).on('click', function () {
           onMarkerClick(
             places.find(
-              (place: Place) =>
+              (place: ArticleMap) =>
                 +place.attributes.latitude === wp.latLng.lat &&
                 +place.attributes.longitude === wp.latLng.lng
             )
