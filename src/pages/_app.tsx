@@ -3,6 +3,7 @@ import App from 'next/app'
 import type { AppProps } from 'next/app'
 import { createContext } from 'react'
 import { fetchApi } from '../api'
+import { GoogleAnalytics } from 'nextjs-google-analytics'
 
 export const GlobalContext = createContext({})
 
@@ -11,6 +12,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <GlobalContext.Provider value={global.attributes}>
+      <GoogleAnalytics trackPageViews />
+
       <Component {...pageProps} />
     </GlobalContext.Provider>
   )
