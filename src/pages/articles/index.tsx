@@ -78,10 +78,12 @@ export async function getStaticProps() {
 
   const { data } = await fetchApi('articles', {
     sort: 'createdAt:desc',
-    populate: ['main', 'place']
+    populate: ['main', 'place'],
     /* pagination: {
       pageSize: 1
-    } */
+    } */ pagination: {
+      limit: 100
+    }
   })
 
   return {
