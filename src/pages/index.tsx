@@ -128,6 +128,9 @@ export async function getStaticProps() {
     populate: ['map_image', 'place'],
     filters: {
       enable_on_map: true
+    },
+    pagination: {
+      limit: 40
     }
   })
   const homepageData = await fetchApi('homepage', {
